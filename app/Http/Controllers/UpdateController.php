@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Http\Request;
-use App;
+use App\UserToGame;
+use App\Game;
 
 class UpdateController extends Controller {
 

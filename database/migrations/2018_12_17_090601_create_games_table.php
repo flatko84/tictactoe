@@ -13,7 +13,7 @@ class CreateGamesTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('games', function (Blueprint $table) {
-			$table->increments('id');
+			$table->increments('game_id');
 			$table->integer('creator_user_id');
 			$table->text('state');
 			$table->integer('status');

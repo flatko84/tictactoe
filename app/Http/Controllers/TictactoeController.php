@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Game;
+use Illuminate\Support\Facades\Auth;
 
 class TictactoeController extends Controller {
 
@@ -12,9 +13,15 @@ class TictactoeController extends Controller {
 	}
 
 	public function index() {
+		$user_id = Auth::id();
 
 
-		$game = new Game(				);
+		$game = new Game;
+		$game->creator_user_id = $user_id;
+		$game->state = '';
+		$game->status = '-1';
+		
+		$game->save();
 		return view('tictactoe');
 	}
 
@@ -32,4 +39,5 @@ class TictactoeController extends Controller {
 	}
 
 }
+
 //sums to win: 73, 146, 292, 84, 273, 7, 56, 384
