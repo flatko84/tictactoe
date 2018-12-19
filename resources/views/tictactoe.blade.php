@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+			var symbol = '{{ $symbol }}';
+			var game_id = '{{ $game_id }}';
+			</script>
+<script src="{{ asset('js/eventsource.js') }}" defer></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/tictactoe', 'TictactoeController@index')->name('tictactoe');
+Route::get('/tictactoe/{game_id}','TictactoeController@index');
 Route::post('/tictactoe/turn','TictactoeController@turn')->name('turn');
 
-Route::get('/update','UpdateController@index');
+Route::get('/update/{game_id}','UpdateController@index');

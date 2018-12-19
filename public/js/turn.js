@@ -11,6 +11,10 @@
             success: function (json) {
                
             $('#'+json.cell).html(json.symbol);
+            if (json.end){
+                alert(json.end);
+            }
+           console.log(json);
 
             }
         });
