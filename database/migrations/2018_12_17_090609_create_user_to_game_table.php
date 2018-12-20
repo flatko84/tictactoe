@@ -27,7 +27,7 @@ class CreateUserToGameTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists('user_to_games');
+		Schema::dropIfExists('user_to_game');
 	}
 
 }

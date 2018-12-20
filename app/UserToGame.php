@@ -8,7 +8,6 @@ class UserToGame extends Model {
 
 	protected $table = 'user_to_game';
 	protected $primaryKey =  'user_game_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	public function users() {
