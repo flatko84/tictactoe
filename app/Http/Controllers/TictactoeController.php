@@ -68,9 +68,11 @@ class TictactoeController extends Controller {
 		$turns = Turns::where('game_id',$user_game->game_id)->get();
 		
 		foreach ($turns as $turn){
+			if ($turn->turn != 'start'){
 			$game_state[] = $turn->turn;
 			if ($turn->user_id == $user_id) {
 				$user_game_state[] = $turn->turn;
+			}
 			}
 		}
 
