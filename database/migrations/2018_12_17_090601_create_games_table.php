@@ -17,7 +17,6 @@ class CreateGamesTable extends Migration {
 			$table->integer('creator_user_id');
 			$table->integer('last_played_id');
 			$table->integer('open');
-			$table->text('state');
 			$table->integer('status');
 			
 		});

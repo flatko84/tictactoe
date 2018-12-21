@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{ asset('js/opengames.js')}}">
+</script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,12 +10,8 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-					<h3>Users online:</h3>
-                    @foreach ($users as $user)
-
-					{{ $user }} <br>
-
-                    @endforeach
+					<h3>Open games:</h3>
+					<div id="open-games"></div>
 
 
                 </div>

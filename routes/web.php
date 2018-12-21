@@ -23,3 +23,4 @@ Route::get('/tictactoe/{game_id}','TictactoeController@index');
 Route::post('/tictactoe/turn','TictactoeController@turn')->name('turn');
 
 Route::get('/update/{game_id}','UpdateController@index');
+Route::get('/opengames','UpdateController@getOpenGames');

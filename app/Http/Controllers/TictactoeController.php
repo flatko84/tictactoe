@@ -18,14 +18,21 @@ class TictactoeController extends Controller {
 
 		$user_id = Auth::id();
 
-		//UserToGame::where('user_id')
+		$check_previous = UserToGame::where('user_id',$user_id)->where('status','-1')->first();
+		
+		
+		if ($check_previous != null){
+		Game::where('game_id', $check_previous->game_id)->update(['status' => '1']);
+		UserToGame::where('game_id', $check_previous->game_id)->update(['status' => '1']);
+		}
+		
+		
 		$symbol = '0';
 		if ($game_id == 0) {
 			$game = new Game;
 			$game->creator_user_id = $user_id;
 			$game->last_played_id = $user_id;
 			$game->open = '1';
-			$game->state = serialize(array());
 			$game->status = '0';
 			$game->save();
 			$game_id = $game->game_id;
@@ -38,7 +45,6 @@ class TictactoeController extends Controller {
 		$user_to_game = new UserToGame;
 		$user_to_game->game_id = $game_id;
 		$user_to_game->user_id = $user_id;
-		$user_to_game->state = serialize(array());
 		$user_to_game->status = '-1';
 		$user_to_game->save();
 		

@@ -11,6 +11,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Tic Tac Toe</div>
+				<div id="messages">
+					
+				</div>
 				<div id="win" style="display: none;">
 					You win!
 				</div>
