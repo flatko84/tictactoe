@@ -26,6 +26,7 @@ class UpdateController extends Controller {
 				header('Cache-Control: no-cache');
 				header("Content-Type: text/event-stream\n\n");
 				$response['turn'] = $turn->turn;
+				$response['user'] = $turn->users->name;
 				if ($turn->user_to_game->status > -1) {
 					$response['end'] = $turn->user_to_game->status;
 					$end = 1;
