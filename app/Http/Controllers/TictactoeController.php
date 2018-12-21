@@ -18,15 +18,15 @@ class TictactoeController extends Controller {
 
 		$user_id = Auth::id();
 
-		$check_previous = UserToGame::where('user_id',$user_id)->where('status','-1')->first();
-		
-		
-		if ($check_previous != null){
-		Game::where('game_id', $check_previous->game_id)->update(['status' => '1']);
-		UserToGame::where('game_id', $check_previous->game_id)->update(['status' => '1']);
+		$check_previous = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
+
+
+		if ($check_previous != null) {
+			Game::where('game_id', $check_previous->game_id)->update(['status' => '1']);
+			UserToGame::where('game_id', $check_previous->game_id)->update(['status' => '1']);
 		}
-		
-		
+
+
 		$symbol = '0';
 		if ($game_id == 0) {
 			$game = new Game;
@@ -47,9 +47,9 @@ class TictactoeController extends Controller {
 		$user_to_game->user_id = $user_id;
 		$user_to_game->status = '-1';
 		$user_to_game->save();
-		
+
 		$user_game_id = $user_to_game->user_game_id;
-		
+
 
 		$turn = new Turns;
 		$turn->game_id = $game_id;
@@ -69,16 +69,16 @@ class TictactoeController extends Controller {
 		$cell = $request->message;
 		$game_state = array();
 		$user_game_state = array();
-		
+
 		$user_game = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
-		$turns = Turns::where('game_id',$user_game->game_id)->get();
-		
-		foreach ($turns as $turn){
-			if ($turn->turn != 'start'){
-			$game_state[] = $turn->turn;
-			if ($turn->user_id == $user_id) {
-				$user_game_state[] = $turn->turn;
-			}
+		$turns = Turns::where('game_id', $user_game->game_id)->get();
+
+		foreach ($turns as $turn) {
+			if ($turn->turn != 'start') {
+				$game_state[] = $turn->turn;
+				if ($turn->user_id == $user_id) {
+					$user_game_state[] = $turn->turn;
+				}
 			}
 		}
 
@@ -88,7 +88,7 @@ class TictactoeController extends Controller {
 
 			Game::where('game_id', $user_game->game_id)
 					->update(['last_played_id' => $user_id]);
-			
+
 			$new_turn = new Turns();
 			$new_turn->user_id = $user_id;
 			$new_turn->game_id = $user_game->game_id;
@@ -96,7 +96,7 @@ class TictactoeController extends Controller {
 			$new_turn->turn = $cell;
 			$new_turn->sent = '0';
 			$new_turn->save();
-			
+
 			$symbol = ($user_game->games->creator_user_id == $user_game->user_id) ? 'X' : '0';
 
 			$response = array(

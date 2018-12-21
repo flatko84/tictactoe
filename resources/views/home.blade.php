@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
-
+				<a href="/tictactoe">Tictactoe</a>
                 <div class="card-body">
 					<h3>Open games:</h3>
 					<div id="open-games"></div>
