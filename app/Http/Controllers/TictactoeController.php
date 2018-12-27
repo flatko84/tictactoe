@@ -144,5 +144,3 @@ class TictactoeController extends Controller {
 	}
 
 }
-
-//BIG ToDo - validation of joining game - only when open and only when not the same user!!!
