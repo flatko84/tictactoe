@@ -5,7 +5,7 @@ evtSource.addEventListener("turn", function (e) {
     var obj = JSON.parse(e.data);
     //console.log(obj['turn']);
     $('#' + obj['turn']).html(symbol);
-    $('#messages').html("User " + obj['user'] + " joined.");
+    $('#messages').html(obj['user'] + joined);
 
 //console.log(obj);
     if (obj['end']) {

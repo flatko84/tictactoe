@@ -52,7 +52,7 @@ class UpdateController extends Controller {
 
 	public function getOpenGames() {
 
-		$games = Game::where('open', '1')->get();
+		$games = Game::where('open', '1')->where('status','0')->get();
 		$response = array();
 		$response = array();
 		$i = 0;

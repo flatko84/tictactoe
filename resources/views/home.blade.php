@@ -6,10 +6,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
-				<a href="/tictactoe">Tictactoe</a>
+                <div class="card-header"> {{ __('home.dashboard')}}</div>
+				<a href="/tictactoe"> {{__('tictactoe.title')}}</a>
                 <div class="card-body">
-					<h3>Open games:</h3>
+					<h3> {{__('home.opengames') }}</h3>
 					<div id="open-games"></div>
 
 

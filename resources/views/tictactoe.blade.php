@@ -1,27 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="text/javascript">
-    var symbol = '{{ $symbol }}';
-    var game_id = '{{ $game_id }}';
-</script>
+
 <script src="{{ asset('js/eventsource.js') }}" defer></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Tic Tac Toe</div>
+                <div class="card-header">{{ __('tictactoe.title') }}</div>
 				<div id="messages">
 
 				</div>
 				<div id="win" style="display: none;">
-					You win!
+					{{ __('tictactoe.win') }}
 				</div>
 				<div id="lose" style="display: none;">
-					You lose!
+					{{ __('tictactoe.lose') }}
 				</div>
 				<div id="tie" style="display: none;">
-					It's a tie!
+					{{ __('tictactoe.tie') }}
 				</div>
                 <div class="card-body">
                     @if (session('status'))
@@ -49,7 +46,7 @@
 
 					</table>
 					<br><br>
-                    <a href="/home">Back To Home Page</a>
+                    <a href="/home">{{ __('tictactoe.home') }}</a>
                 </div>
 
             </div>
@@ -63,6 +60,7 @@
 <script type="text/javascript">
     var symbol = '{{ $symbol }}';
     var game_id = '{{ $game_id }}';
+	var joined = "{{ __('tictactoe.joined') }}";
 </script>
 <script src="{{ asset('js/eventsource.js') }}" defer></script>
 <script src="{{ asset('js/turn.js') }}" defer></script>
