@@ -57,3 +57,13 @@
     </div>
 </div>
 @endsection
+
+
+@section('eventsource')
+<script type="text/javascript">
+    var symbol = '{{ $symbol }}';
+    var game_id = '{{ $game_id }}';
+</script>
+<script src="{{ asset('js/eventsource.js') }}" defer></script>
+<script src="{{ asset('js/turn.js') }}" defer></script>
+@endsection

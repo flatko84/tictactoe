@@ -36,31 +36,33 @@ class TictactoeController extends Controller {
 			$game->status = '0';
 			$game->save();
 			$game_id = $game->game_id;
-		} else {
+		} elseif (Game::where('game_id', $game_id)->first()->open == '1') {
 			$symbol = 'X';
 			Game::where('game_id', $game_id)
 					->update(['open' => '0', 'last_played_id' => $user_id]);
 		}
 
-		$user_to_game = new UserToGame;
-		$user_to_game->game_id = $game_id;
-		$user_to_game->user_id = $user_id;
-		$user_to_game->status = '-1';
-		$user_to_game->save();
+		if ($game_id != '0') {
+			$user_to_game = new UserToGame;
+			$user_to_game->game_id = $game_id;
+			$user_to_game->user_id = $user_id;
+			$user_to_game->status = '-1';
+			$user_to_game->save();
 
-		$user_game_id = $user_to_game->user_game_id;
+			$user_game_id = $user_to_game->user_game_id;
 
 
-		$turn = new Turns;
-		$turn->game_id = $game_id;
-		$turn->user_id = $user_id;
-		$turn->user_game_id = $user_game_id;
-		$turn->turn = 'start';
-		$turn->sent = '0';
-		$turn->save();
+			$turn = new Turns;
+			$turn->game_id = $game_id;
+			$turn->user_id = $user_id;
+			$turn->user_game_id = $user_game_id;
+			$turn->turn = 'start';
+			$turn->sent = '0';
+			$turn->save();
 
-		$response = ['symbol' => $symbol, 'game_id' => $game_id];
-		return view('tictactoe', $response);
+			$response = ['symbol' => $symbol, 'game_id' => $game_id];
+			return view('tictactoe', $response);
+		}
 	}
 
 	public function turn(Request $request) {
@@ -82,7 +84,7 @@ class TictactoeController extends Controller {
 			}
 		}
 
-		if (!in_array($cell, $game_state) && $user_game->games->open == 0 && $user_game->games->last_played_id != $user_id) {
+		if (!in_array($cell, $game_state) && $user_game->games->open == 0 && $user_game->games->last_played_id != $user_id && (int) $cell >= 1 && (int) $cell <= 9) {
 			$game_state[] = $cell;
 			$user_game_state[] = $cell;
 
@@ -144,4 +146,3 @@ class TictactoeController extends Controller {
 }
 
 //BIG ToDo - validation of joining game - only when open and only when not the same user!!!
-//validation of proper number request from Turn - only recognized numbers

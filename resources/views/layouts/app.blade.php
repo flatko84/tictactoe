@@ -11,8 +11,8 @@
 
 		<!-- Scripts -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="{{ asset('js/turn.js') }}" defer></script>
-		
+		<script src="{{ asset('js/app.js') }}" defer></script>
+		@yield('eventsource')
 
 		<!-- Fonts -->
 		<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -21,7 +21,7 @@
 		<!-- Styles -->
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/stylesheet.css') }}" rel="stylesheet">
-		
+        
 	</head>
 	<body>
 		<div id="app">

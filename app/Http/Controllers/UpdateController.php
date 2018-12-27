@@ -9,7 +9,6 @@ use App\Game;
 use App\Turns;
 use Illuminate\Support\Facades\Auth;
 
-
 class UpdateController extends Controller {
 
 	public function index($game_id) {
@@ -53,10 +52,10 @@ class UpdateController extends Controller {
 
 	public function getOpenGames() {
 
-		$games = Game::where('open','1')->get();
+		$games = Game::where('open', '1')->get();
 		$response = array();
 		$response = array();
-		$i=0;
+		$i = 0;
 		foreach ($games as $game) {
 			$response[$i]['name'] = $game->users->name;
 			$response[$i]['game_id'] = $game->game_id;
@@ -68,11 +67,10 @@ class UpdateController extends Controller {
 		echo "event: ping\n";
 		echo 'data: ' . json_encode($response);
 		echo "\n\n";
-		
+
 
 		ob_end_flush();
 		flush();
-		
 	}
 
 }
