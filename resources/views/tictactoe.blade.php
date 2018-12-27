@@ -46,7 +46,7 @@
 
 					</table>
 					<br><br>
-                    <a href="/home">{{ __('tictactoe.home') }}</a>
+                    <a href="{{ route('home') }}">{{ __('tictactoe.home') }}</a>
                 </div>
 
             </div>
