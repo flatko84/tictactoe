@@ -7,7 +7,7 @@ use App\Game;
 use App\UserToGame;
 use App\Turns;
 use Illuminate\Support\Facades\Auth;
-use App\Library\NewGame;
+use App\Library\GameActions;
 
 class TictactoeController extends Controller {
 
@@ -17,11 +17,14 @@ class TictactoeController extends Controller {
 
 	public function index($game_id = 0) {
 
-			$game = new App\Library\NewGame();
 
-			$response = $game->index();
-			return view('tictactoe', $response);
-		}
+
+		$data = GameActions::createGame($game_id, 'tictactoe', 2);
+
+		$response['game_id'] = $data['game_id'];
+		$response['symbol'] = ($data['creator'] === true) ? '0' : 'X';
+
+		return view('tictactoe', $response);
 	}
 
 	public function turn(Request $request) {
@@ -66,22 +69,12 @@ class TictactoeController extends Controller {
 			);
 
 			if ($this->calculateWin($user_game_state) == 1) {
-				$response['end'] = $this->endGame($user_id, $user_game->game_id, 2);
+				$response['end'] = GameActions::endGame($user_id, $user_game->game_id, 2);
 			} elseif (count($game_state) == 9) {
-				$response['end'] = $this->endGame($user_id, $user_game->game_id, 1);
+				$response['end'] = GameActions::endGame($user_id, $user_game->game_id, 1);
 			};
 			return json_encode($response);
 		}
-	}
-
-	protected function endGame($user_id, $game_id, $result) {
-
-		$other_result = ($result > 1) ? 0 : 2;
-		$other_result = ($result == 1) ? 1 : $other_result;
-		Game::where('game_id', $game_id)->update(['status' => '1']);
-		UserToGame::where('user_id', $user_id)->where('game_id', $game_id)->update(['status' => $result]);
-		UserToGame::where('user_id', '!=', $user_id)->where('game_id', $game_id)->update(['status' => $other_result]);
-		return $result;
 	}
 
 	protected function calculateWin($fields) {

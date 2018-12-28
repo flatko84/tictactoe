@@ -7,9 +7,18 @@ use App\UserToGame;
 use App\Turns;
 use Illuminate\Support\Facades\Auth;
 
-class NewGame {
+class GameActions {
 
-	public function index($game_id = 0) {
+//	Game modes:	1 = Single player only,
+//					-disable joining, always closed, saveable
+//		i		2 = Requires exactly two players,
+//					-close on joining, cannot turn if single player, not saveable
+//				3 = Multiplayer required, no max limit,
+//					-close on turning, cannot turn if single player, not saveable
+//				4 = Single or multiplayer allowed, saveable
+//					-close on turning
+
+	public static function createGame($game_id, $game_type, $game_mode) {
 		$user_id = Auth::id();
 
 		$check_previous = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
@@ -21,9 +30,10 @@ class NewGame {
 		}
 
 
-		$symbol = '0';
+		$creator = true;
 		if ($game_id == 0) {
 			$game = new Game;
+			$game->game_type = $game_type;
 			$game->creator_user_id = $user_id;
 			$game->last_played_id = $user_id;
 			$game->open = '1';
@@ -31,9 +41,11 @@ class NewGame {
 			$game->save();
 			$game_id = $game->game_id;
 		} elseif (Game::where('game_id', $game_id)->first()->open == '1') {
-			$symbol = 'X';
+			$creator = false;
+			$open = ($game_mode == 2) ? '0' : '1';
+			
 			Game::where('game_id', $game_id)
-					->update(['open' => '0', 'last_played_id' => $user_id]);
+					->update(['open' => $open, 'last_played_id' => $user_id]);
 		}
 
 		if ($game_id != '0') {
@@ -54,9 +66,22 @@ class NewGame {
 			$turn->sent = '0';
 			$turn->save();
 
-			$response = ['symbol' => $symbol, 'game_id' => $game_id];
+			$response = ['creator' => $creator, 'game_id' => $game_id];
 			return $response;
 		}
+	}
+
+	public static function turn($move) {
+		
+	}
+
+	public static function endGame($user_id, $game_id, $result) {
+		$other_result = ($result > 1) ? 0 : 2;
+		$other_result = ($result == 1) ? 1 : $other_result;
+		Game::where('game_id', $game_id)->update(['status' => '1']);
+		UserToGame::where('user_id', $user_id)->where('game_id', $game_id)->update(['status' => $result]);
+		UserToGame::where('user_id', '!=', $user_id)->where('game_id', $game_id)->update(['status' => $other_result]);
+		return $result;
 	}
 
 }
