@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class GameActions {
 
-//	Game modes:	1 = Single player only,
-//					-disable joining, always closed, saveable
-//		i		2 = Requires exactly two players,
-//					-close on joining, cannot turn if single player, not saveable
-//				3 = Multiplayer required, no max limit,
-//					-close on turning, cannot turn if single player, not saveable
-//				4 = Single or multiplayer allowed, saveable
-//					-close on turning
+/*	Game modes:	1 = Single player only,
+					-disable joining, always closed, saveable
+		i		2 = Requires exactly two players,
+					-close on joining, cannot turn if single player, not saveable
+				3 = Multiplayer required, no max limit,
+					-close on turning, cannot turn if single player, not saveable
+				4 = Single or multiplayer allowed, saveable
+					-close on turning  */
 
 	public static function startGame($game_id, $game_type, $game_mode) {
 		$user_id = Auth::id();
@@ -60,7 +60,6 @@ class GameActions {
 				$user_to_game->save();
 
 				$user_game_id = $user_to_game->user_game_id;
-
 
 				$turn = new Turns;
 				$turn->game_id = $game_id;
