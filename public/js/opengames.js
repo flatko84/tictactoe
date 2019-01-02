@@ -4,7 +4,7 @@ evtSource.addEventListener("ping", function (e) {
     var games = JSON.parse(e.data);
     var text = '';
     for (i = 0; i < games.length; i++) {
-        text += '<a href="/tictactoe/' + games[i].game_id + '">' + games[i].name + '</a>';
+        text += '<a href="/' + games[i].game_type + '/' + games[i].game_id + '">' + games[i].name + '</a> - ' + games[i].game_type;
     }
     $('#open-games').html(text);
 

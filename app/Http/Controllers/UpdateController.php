@@ -59,6 +59,7 @@ class UpdateController extends Controller {
 		foreach ($games as $game) {
 			$response[$i]['name'] = $game->users->name;
 			$response[$i]['game_id'] = $game->game_id;
+			$response[$i]['game_type'] = $game->game_type;
 		}
 		header('Cache-Control: no-cache');
 		header("Content-Type: text/event-stream\n\n");

@@ -17,9 +17,7 @@ class TictactoeController extends Controller {
 
 	public function index($game_id = 0) {
 
-
-
-		$data = GameActions::createGame($game_id, 'tictactoe', 2);
+		$data = GameActions::startGame($game_id, 'tictactoe', 2);
 
 		$response['game_id'] = $data['game_id'];
 		$response['symbol'] = ($data['creator'] === true) ? '0' : 'X';
