@@ -6,16 +6,13 @@
  * and open the template in the editor.
  */
 
-namespace App\Providers\Games;
+namespace App\Library;
 
 /**
- * Description of Tictactoe
  *
  * @author vdonkov
  */
-class Tictactoe {
-	private $game_type = "tictactoe";
-	private $game_mode = 2;
-	
-	private $response = array();
+interface GameInterface {
+	public function getGameMode();
+	public function calculateWin($fields);
 }

@@ -3,13 +3,13 @@ $(document).ready(function () {
     $('.press').click(function () {
         var cell = $(this).attr("id");
         $.ajax({
-            url: '/tictactoe/turn',
+            url: '/game/turn',
             type: 'post',
             data: {_token: CSRF_TOKEN, message: cell},
             dataType: 'json',
             success: function (json) {
 
-                $('#' + json.cell).html(json.symbol);
+                $('#' + json.cell).html(symbol);
                 if (json.end) {
                     switch (json.end)
                     {

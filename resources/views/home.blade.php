@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header"> {{ __('home.dashboard')}}</div>
-				<a href="{{ route('home') }}"> {{__('tictactoe.title')}}</a>
+				<a href="{{ route('game',['game_type'=>'tictactoe']) }}"> {{__('tictactoe.title')}}</a>
                 <div class="card-body">
 					<h3> {{__('home.opengames') }}</h3>
 					<div id="open-games"></div>

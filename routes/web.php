@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/game', 'GameController@startGame');
-Route::get('/game/{game_type}/{game_id?}', 'GameController@startGame');
+Route::get('/game/{game_type}/{game_id?}', 'GameController@startGame')->name('game');
 Route::post('/game/turn', 'GameController@turn');
 
 Route::get('/update/{game_id}', 'UpdateController@index');

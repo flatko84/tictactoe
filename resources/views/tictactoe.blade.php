@@ -58,7 +58,9 @@
 
 @section('eventsource')
 <script type="text/javascript">
-    var symbol = '{{ $symbol }}';
+    var creator = '{{ $creator }}';
+	var symbol = (creator == true) ? 'X' : '0';
+	var other_symbol = (creator == true) ? '0' : 'X';
     var game_id = '{{ $game_id }}';
 	var joined = "{{ __('tictactoe.joined') }}";
 </script>

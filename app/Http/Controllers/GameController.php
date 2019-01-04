@@ -7,13 +7,17 @@ use App\Game;
 use App\UserToGame;
 use App\Turns;
 use Illuminate\Support\Facades\Auth;
-use App\Library\GameActions;
+use App\Library\GameSelector;
 
 class GameController extends Controller {
 
 	public function startGame($game_type, $game_id = 0) {
+
+		$game_select = new GameSelector();
+		$game = $game_select->newGame($game_type);
+
 		$user_id = Auth::id();
-		$game_mode = 2;
+		$game_mode = $game->getGameMode();
 		$check_previous = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
 
 		if (($game_mode == 1 || $game_mode == 4) && $check_previous != null && $check_previous->games->game_type == $game_type) {
@@ -64,7 +68,6 @@ class GameController extends Controller {
 			}
 
 			$response = ['creator' => $creator, 'game_id' => $game_id];
-			$response['symbol'] = ($creator === true) ? '0' : 'X';
 		}
 		return view($game_type, $response);
 	}
@@ -78,6 +81,10 @@ class GameController extends Controller {
 
 		$user_game = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
 		$turns = Turns::where('game_id', $user_game->game_id)->get();
+
+		$game_select = new GameSelector();
+		$game = $game_select->newGame($user_game->games->game_type);
+		$game_mode = $game->getGameMode();
 
 		foreach ($turns as $turn) {
 			if ($turn->turn != 'start') {
@@ -103,17 +110,14 @@ class GameController extends Controller {
 			$new_turn->sent = '0';
 			$new_turn->save();
 
-			$symbol = ($user_game->games->creator_user_id == $user_game->user_id) ? 'X' : '0';
-
 			$response = array(
-				'symbol' => $symbol,
 				'cell' => $cell
 			);
 
-			if ($this->calculateWin($user_game_state) == 1) {
-				$response['end'] = GameActions::endGame($user_id, $user_game->game_id, 2);
+			if ($game->calculateWin($user_game_state) == 1) {
+				$response['end'] = $this->endGame($user_id, $user_game->game_id, 2);
 			} elseif (count($game_state) == 9) {
-				$response['end'] = GameActions::endGame($user_id, $user_game->game_id, 1);
+				$response['end'] = $this->endGame($user_id, $user_game->game_id, 1);
 			}
 			return json_encode($response);
 		}

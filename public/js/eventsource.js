@@ -1,10 +1,9 @@
-
 var evtSource = new EventSource("/update/" + game_id);
 evtSource.addEventListener("turn", function (e) {
 
     var obj = JSON.parse(e.data);
     //console.log(obj['turn']);
-    $('#' + obj['turn']).html(symbol);
+    $('#' + obj['turn']).html(other_symbol);
     $('#messages').html(obj['user'] + joined);
 
 //console.log(obj);
