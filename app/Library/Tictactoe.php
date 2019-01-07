@@ -45,5 +45,9 @@ class Tictactoe implements GameInterface {
 		}
 		return $result;
 	}
+	
+	public function validateTurn(){
+		
+	}
 
 }

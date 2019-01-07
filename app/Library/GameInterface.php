@@ -15,4 +15,5 @@ namespace App\Library;
 interface GameInterface {
 	public function getGameMode();
 	public function calculateWin($fields);
+	public function validateTurn();
 }

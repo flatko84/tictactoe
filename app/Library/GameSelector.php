@@ -9,17 +9,25 @@
 namespace App\Library;
 
 use App\Library\Tictactoe;
+
 /**
  * Description of GameStrategy
  *
  * @author vdonkov
  */
 class GameSelector {
-	
+
 	private $game;
-	public function newGame($game_type){
-		
-		$this->game = new Tictactoe();
+
+	public function newGame($game_type) {
+
+		switch ($game_type) {
+			case 'tictactoe':
+				$this->game = new Tictactoe();
+				break;
+		}
+
 		return $this->game;
 	}
+
 }

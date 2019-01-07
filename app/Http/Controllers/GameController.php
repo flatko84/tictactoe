@@ -100,7 +100,7 @@ class GameController extends Controller {
 			$user_game_state[] = $cell;
 
 			Game::where('game_id', $user_game->game_id)
-					->update(['last_played_id' => $user_id]);
+					->update(['last_played_id' => $user_id, 'open' => '0']);
 
 			$new_turn = new Turns();
 			$new_turn->user_id = $user_id;
