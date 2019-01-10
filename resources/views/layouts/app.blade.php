@@ -13,6 +13,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="{{ asset('js/app.js') }}" defer></script>
 		@yield('eventsource')
+                
 
 		<!-- Fonts -->
 		<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -78,6 +79,10 @@
 
 			<main class="py-4">
 				@yield('content')
+                                <div id="chat">
+                                    <div id="chat-window">Chat started</div> 
+                                    <input type="text" id="send-text"><input type="button" id="send-button" value="Send">
+                                </div>
 			</main>
 		</div>
 	</body>

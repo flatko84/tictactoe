@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\Game;
 use App\UserToGame;
 use App\Turns;
+use App\Chat;
 use Illuminate\Support\Facades\Auth;
 use App\Library\GameSelector;
 
 class GameController extends Controller {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     public function startGame($game_type, $game_id = 0) {
 
@@ -41,7 +46,9 @@ class GameController extends Controller {
                 $game->status = '0';
                 $game->save();
                 $game_id = $game->game_id;
+                
             } elseif (Game::where('game_id', $game_id)->first()->open == '1') {
+                
                 $creator = false;
                 $open = ($game_mode == 2) ? '0' : '1';
 
@@ -104,16 +111,15 @@ class GameController extends Controller {
 
             Game::where('game_id', $user_game->game_id)
                     ->update(['last_played_id' => $user_id]);
-        
 
-        $new_turn = new Turns();
-        $new_turn->user_id = $user_id;
-        $new_turn->game_id = $user_game->game_id;
-        $new_turn->user_game_id = $user_game->user_game_id;
-        $new_turn->turn = $cell;
-        $new_turn->sent = '0';
-        $new_turn->save();
-        
+
+            $new_turn = new Turns();
+            $new_turn->user_id = $user_id;
+            $new_turn->game_id = $user_game->game_id;
+            $new_turn->user_game_id = $user_game->user_game_id;
+            $new_turn->turn = $cell;
+            $new_turn->sent = '0';
+            $new_turn->save();
         }
 
         $response = array(
@@ -126,6 +132,22 @@ class GameController extends Controller {
             $response['end'] = $this->endGame($user_id, $user_game->game_id, 1);
         }
         return json_encode($response);
+    }
+
+    public function chat(Request $request) {
+        $user_id = Auth::id();
+        $message = $request->message;
+        $user_game = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
+
+        $new_turn = new Chat();
+        $new_turn->user_id = $user_id;
+        $new_turn->game_id = $user_game->game_id;
+        $new_turn->user_game_id = $user_game->user_game_id;
+        $new_turn->message = $message;
+        $new_turn->sent = '0';
+        $new_turn->save();
+        
+        return json_response($message);
     }
 
     protected function endGame($user_id, $game_id, $result) {
