@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Turns extends Model {
+class Chat extends Model {
 
-    protected $primaryKey = 'turn_id';
-    protected $table = 'turns';
+    protected $primaryKey = 'chat_id';
+    protected $table = 'chat';
 
     public function games() {
 

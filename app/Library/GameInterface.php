@@ -13,7 +13,10 @@ namespace App\Library;
  * @author vdonkov
  */
 interface GameInterface {
+
 	public function getGameMode();
+
 	public function calculateWin($fields);
-	public function validateTurn();
+
+	public function validateTurn($data);
 }

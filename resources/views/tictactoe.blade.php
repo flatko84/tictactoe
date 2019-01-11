@@ -66,4 +66,11 @@
 </script>
 <script src="{{ asset('js/eventsource.js') }}" defer></script>
 <script src="{{ asset('js/tictactoe.js') }}" defer></script>
+<script src="{{ asset('js/chat.js') }}" defer></script>
+<script src="{{ asset('js/chat-eventsource.js') }}" defer></script>
+
+@endsection
+
+@section('chat')
+
 @endsection

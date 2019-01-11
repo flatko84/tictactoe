@@ -1,13 +1,11 @@
-var evtSource = new EventSource("/update/" + game_id);
-evtSource.addEventListener("turn", function (e) {
+var evtSource = new EventSource("/chat/" + game_id);
+evtSource.addEventListener("chat", function (e) {
 
     var obj = JSON.parse(e.data);
     //console.log(obj['turn']);
-    $('#' + obj['turn']).html(other_symbol);
-    $('#messages').html(obj['user'] + joined);
-    if (obj['message']) {
-        $('#chat-window').append(obj['message'] + "<br>");
-    }
+
+    $('#chat-window').append("<br>" + obj['chat'] + "<br>");
+
 console.log(obj);
     if (obj['end']) {
         switch (obj['end'])
