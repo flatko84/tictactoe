@@ -5,10 +5,8 @@ evtSource.addEventListener("turn", function (e) {
     //console.log(obj['turn']);
     $('#' + obj['turn']).html(other_symbol);
     $('#messages').html(obj['user'] + joined);
-    if (obj['message']) {
-        $('#chat-window').append(obj['message'] + "<br>");
-    }
-console.log(obj);
+
+//console.log(obj);
     if (obj['end']) {
         switch (obj['end'])
         {

@@ -6,7 +6,7 @@ evtSource.addEventListener("chat", function (e) {
 
     $('#chat-window').append("<br>" + obj['chat'] + "<br>");
 
-console.log(obj);
+//console.log(obj);
     if (obj['end']) {
         switch (obj['end'])
         {

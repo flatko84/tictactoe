@@ -16,7 +16,5 @@ interface GameInterface {
 
 	public function getGameMode();
 
-	public function calculateWin($fields);
-
-	public function validateTurn($data);
+	public function Turn($user_id, $user_game, $turns, $cell);
 }

@@ -79,10 +79,7 @@
 
 			<main class="py-4">
 				@yield('content')
-                                <div id="chat">
-                                    <div id="chat-window">Chat started</div> 
-                                    <input type="text" id="send-text"><input type="button" id="send-button" value="Send">
-                                </div>
+                @yield('chat')                
 			</main>
 		</div>
 	</body>

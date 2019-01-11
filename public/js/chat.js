@@ -8,10 +8,10 @@ $(document).ready(function () {
             data: {_token: CSRF_TOKEN, message: message},
             dataType: 'json',
             success: function (json) {
-
+                $('#send-text').val('');
                 $('#chat-window').append("<br>" + json + "<br>");
                 
-                console.log(json);
+                //console.log(json);
 
             }
         });
