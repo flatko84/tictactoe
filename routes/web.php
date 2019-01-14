@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/game', 'GameController@startGame');
-Route::get('/game/{game_type}/{game_id?}', 'GameController@startGame')->name('game');
+Route::get('/game/{game_type}/{game_id?}', 'GameController@startGame')->name('game')->middleware('selectgame');
 Route::post('/game/turn', 'GameController@turn');
 Route::post('/game/chat', 'GameController@chat');
 

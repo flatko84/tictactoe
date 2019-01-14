@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.game')
 
 @section('content')
 
@@ -64,16 +64,6 @@ var other_symbol = (creator == true) ? '0' : 'X';
 var game_id = '{{ $game_id }}';
 var joined = "{{ __('tictactoe.joined') }}";
 </script>
-<script src="{{ asset('js/eventsource.js') }}" defer></script>
 <script src="{{ asset('js/tictactoe.js') }}" defer></script>
-<script src="{{ asset('js/chat.js') }}" defer></script>
-<script src="{{ asset('js/chat-eventsource.js') }}" defer></script>
-
 @endsection
 
-@section('chat')
-<div id="chat">
-	<div id="chat-window">Chat started<br></div> 
-	<input type="text" id="send-text"><input type="button" id="send-button" value="Send">
-</div>
-@endsection

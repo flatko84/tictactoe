@@ -24,7 +24,6 @@ class UpdateController extends Controller {
 
 			$turn = Turns::where('game_id', $game_id)->where('user_id', '!=', $user_id)->where('sent', '0')->first();
 			
-
 			if ($turn != null) {
 				$force = 0;
 				Turns::where('turn_id', $turn->turn_id)->update(['sent' => '1']);
@@ -40,7 +39,7 @@ class UpdateController extends Controller {
 				echo "event: turn\n";
 				echo 'data: ' . json_encode($response);
 				echo "\n\n";
-			} elseif ($force == 1) {
+			} else if ($force == 1) {
 
 				$force = 0;
 				header('Cache-Control: no-cache');
@@ -64,7 +63,6 @@ class UpdateController extends Controller {
 		$force = 1;
 		while ($end == 0) {
 
-			
 			$chat = Chat::where('game_id', $game_id)->where('user_id', '!=', $user_id)->where('sent', '0')->first();
 
 			if ($chat != null) {
@@ -72,6 +70,7 @@ class UpdateController extends Controller {
 				Chat::where('chat_id', $chat->chat_id)->update(['sent' => '1']);
 				header('Cache-Control: no-cache');
 				header("Content-Type: text/event-stream\n\n");
+				
 				$response['chat'] = $chat->message;
 				$response['user'] = $chat->users->name;
 
