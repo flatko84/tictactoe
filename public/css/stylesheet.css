@@ -15,8 +15,10 @@ and open the template in the editor.
 
 .my-chat {
     color: #0000F0;
+    background-color: #c6e0f5;
 }
 
 .other-chat {
-    color: #b21f2d;
+    color: #2d995b;
+    background-color: #c3e3b5;
 }
