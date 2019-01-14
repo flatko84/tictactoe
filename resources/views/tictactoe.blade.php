@@ -73,7 +73,7 @@ var joined = "{{ __('tictactoe.joined') }}";
 
 @section('chat')
 <div id="chat">
-	<div id="chat-window">Chat started</div> 
+	<div id="chat-window">Chat started<br></div> 
 	<input type="text" id="send-text"><input type="button" id="send-button" value="Send">
 </div>
 @endsection

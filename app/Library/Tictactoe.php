@@ -22,7 +22,8 @@ class Tictactoe implements GameInterface {
 	}
 
 	public function Turn($user_id, $user_game, $turns, $cell) {
-
+		$game_state = array();
+		$user_game_state = array();
 
 		foreach ($turns as $turn) {
 			if ($turn->turn != 'start') {
@@ -41,13 +42,13 @@ class Tictactoe implements GameInterface {
 				'cell' => $cell
 			);
 
-//			if ($this->calculateWin($user_game_state) == 1) {
-//				$response['end'] = '2';
-//				$response['other_result'] = '0';
-//			} elseif (count($game_state) == 9) {
-//				$response['end'] = '1';
-//				$response['other_result'] = '1';
-//			}
+			if ($this->calculateWin($user_game_state) == 1) {
+				$response['end'] = '2';
+				$response['other_result'] = '0';
+			} elseif (count($game_state) == 9) {
+				$response['end'] = '1';
+				$response['other_result'] = '1';
+			}
 			return $response;
 		} else {
 			return false;

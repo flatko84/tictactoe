@@ -4,7 +4,7 @@ evtSource.addEventListener("chat", function (e) {
     var obj = JSON.parse(e.data);
     //console.log(obj['turn']);
 
-    $('#chat-window').append("<br>" + obj['chat'] + "<br>");
+    $('#chat-window').append("<span class = 'other-chat'>" + obj['user'] + " : " + obj['chat'] + "</span><br>");
 
 //console.log(obj);
     if (obj['end']) {

@@ -13,13 +13,13 @@ $(document).ready(function () {
                 if (json.end) {
                     switch (json.end)
                     {
-                        case 0:
+                        case "0":
                             $('#lose').css('display', 'inline-block');
                             break;
-                        case 1:
+                        case "1":
                             $('#tie').css('display', 'inline-block');
                             break;
-                        case 2:
+                        case "2":
                             $('#win').css('display', 'inline-block');
                             break;
                     }

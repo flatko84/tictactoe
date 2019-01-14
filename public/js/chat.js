@@ -9,7 +9,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (json) {
                 $('#send-text').val('');
-                $('#chat-window').append("<br>" + json + "<br>");
+                $('#chat-window').append("<span class = 'my-chat'>" + json['user'] + " : " + json['message'] + "</span><br>");
                 
                 //console.log(json);
 

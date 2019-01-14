@@ -13,3 +13,10 @@ and open the template in the editor.
     height: 50px;
 }
 
+.my-chat {
+    color: #0000F0;
+}
+
+.other-chat {
+    color: #b21f2d;
+}
