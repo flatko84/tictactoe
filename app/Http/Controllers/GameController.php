@@ -46,6 +46,7 @@ class GameController extends Controller {
 				$game->status = '0';
 				$game->save();
 				$game_id = $game->game_id;
+				
 			} elseif (Game::where('game_id', $game_id)->first()->open == '1') {
 
 				$creator = false;
