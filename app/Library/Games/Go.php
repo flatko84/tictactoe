@@ -16,13 +16,15 @@ use App\Library\GameInterface;
  * @author vdonkov
  */
 class Go implements GameInterface {
+
 	private $game_mode = 2;
 
 	public function getGameMode() {
 		return $this->game_mode;
 	}
-	
+
 	public function Turn($user_id, $user_game, $turns, $cell) {
 		
 	}
+
 }

@@ -113,6 +113,7 @@ return [
 	  | this array to grant expanded functionality to your applications.
 	  |
 	 */
+	'games_namespace' => env('GAMES_NAMESPACE', '\\App\\Library\\Games\\'),
 	'providers' => [
 		/*
 		 * Laravel Framework Service Providers...

@@ -18,8 +18,8 @@ class GameSelector {
 	private $game;
 
 	public function newGame($game_type) {
-		
-		$game_class = "\\App\\Library\\Games\\" . ucfirst($game_type);
+
+		$game_class = config('app.games_namespace') . ucfirst($game_type);
 		$this->game = new $game_class();
 		return $this->game;
 	}
