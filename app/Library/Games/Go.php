@@ -10,11 +10,6 @@ namespace App\Library\Games;
 
 use App\Library\GameInterface;
 
-/**
- * Description of Go
- *
- * @author vdonkov
- */
 class Go implements GameInterface {
 
 	private $game_mode = 2;
