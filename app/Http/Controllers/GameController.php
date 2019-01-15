@@ -46,7 +46,6 @@ class GameController extends Controller {
 				$game->status = '0';
 				$game->save();
 				$game_id = $game->game_id;
-				
 			} elseif (Game::where('game_id', $game_id)->first()->open == '1') {
 
 				$creator = false;
@@ -83,7 +82,7 @@ class GameController extends Controller {
 
 		$user_id = Auth::id();
 		$cell = $request->message;
-		
+
 		$user_game = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
 		$turns = Turns::where('game_id', $user_game->game_id)->get();
 
@@ -106,8 +105,8 @@ class GameController extends Controller {
 
 			if (isset($response['end'])) {
 				Game::where('game_id', $user_game->game_id)->update(['status' => '1']);
-				UserToGame::where('user_id', $user_id)->where('game_id', $user_game->game_id)->update(['status' => (int)$response['end']]);
-				UserToGame::where('user_id', '!=', $user_id)->where('game_id', $user_game->game_id)->update(['status' => (int)$response['other_result']]);
+				UserToGame::where('user_id', $user_id)->where('game_id', $user_game->game_id)->update(['status' => (int) $response['end']]);
+				UserToGame::where('user_id', '!=', $user_id)->where('game_id', $user_game->game_id)->update(['status' => (int) $response['other_result']]);
 			}
 
 			return json_encode($response);
@@ -116,7 +115,7 @@ class GameController extends Controller {
 
 	public function chat(Request $request) {
 		$user_id = Auth::id();
-		
+
 		$user_game = UserToGame::where('user_id', $user_id)->where('status', '-1')->first();
 		$response['message'] = $request->message;
 		$response['user'] = $user_game->users->name;

@@ -8,8 +8,6 @@
 
 namespace App\Library;
 
-use App\Library\Tictactoe;
-
 /**
  * Description of GameStrategy
  *
@@ -20,13 +18,9 @@ class GameSelector {
 	private $game;
 
 	public function newGame($game_type) {
-
-		switch ($game_type) {
-			case 'tictactoe':
-				$this->game = new Tictactoe();
-				break;
-		}
-
+		
+		$game_class = "\\App\\Library\\Games\\" . ucfirst($game_type);
+		$this->game = new $game_class();
 		return $this->game;
 	}
 

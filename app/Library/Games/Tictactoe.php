@@ -6,7 +6,8 @@
  * and open the template in the editor.
  */
 
-namespace App\Library;
+namespace App\Library\Games;
+use App\Library\GameInterface;
 
 /**
  * Description of Tictactoe
