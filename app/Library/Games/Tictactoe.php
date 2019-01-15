@@ -9,11 +9,7 @@
 namespace App\Library\Games;
 use App\Library\GameInterface;
 
-/**
- * Description of Tictactoe
- *
- * @author vdonkov
- */
+
 class Tictactoe implements GameInterface {
 
 	private $game_mode = 2;
